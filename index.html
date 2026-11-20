@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AETHER'S STAIN - El Ciclo Manchado</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="game-container">
+    <!-- Pantalla de Juego Principal -->
+    <div id="viewport-wrapper">
+      <canvas id="view-canvas" width="800" height="600"></canvas>
+      
+      <!-- Retículo de Apuntado -->
+      <div id="crosshair"></div>
+
+      <!-- Flash de Daño / Impacto -->
+      <div id="damage-overlay"></div>
+
+      <!-- Superposición de Mensajes en Pantalla -->
+      <div id="game-toast"></div>
+    </div>
+
+    <!-- Panel Lateral HUD (Minimapa + Máscara Rorschach + Estado) -->
+    <aside id="hud-panel">
+      <div class="hud-header">
+        <h2>AETHER'S STAIN</h2>
+        <span id="sector-title">SECTOR I: LAS CISTERNAS</span>
+      </div>
+
+      <!-- Puntuación del Jugador -->
+      <div class="hud-box score-box">
+        <div class="hud-label">PUNTUACIÓN TOTAL</div>
+        <div id="score-text">0 PTS</div>
+      </div>
+
+      <!-- Minimapa -->
+      <div class="hud-box">
+        <div class="hud-label">RADAR TÁCTICO</div>
+        <canvas id="minimap-canvas" width="200" height="200"></canvas>
+      </div>
+
+      <!-- Máscara de Rorschach (HUD de Salud) -->
+      <div class="hud-box" id="mask-box">
+        <div class="hud-label">INTEGRIDAD ORGÁNICA (EFE)</div>
+        <canvas id="mask-canvas" width="200" height="200"></canvas>
+        <div class="health-bar-container">
+          <div id="health-bar-fill"></div>
+          <span id="health-text">100 / 100 HP</span>
+        </div>
+      </div>
+
+      <!-- Estado del Biochip y Salida -->
+      <div class="hud-box status-box">
+        <div class="hud-label">OBJETIVO DEL SECTOR</div>
+        <div id="objective-status" class="status-indicator">
+          <span class="status-icon">⚪</span>
+          <span id="objective-text">Localiza el Biochip Plateado</span>
+        </div>
+        <div id="door-status" class="status-indicator locked">
+          <span class="status-icon">🔒</span>
+          <span id="door-text">Puerta de Salida: BLOQUEADA</span>
+        </div>
+      </div>
+
+      <!-- Controles Guía -->
+      <div class="hud-box controls-guide">
+        <div class="hud-label">CONTROLES</div>
+        <ul>
+          <li><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> - Moverse</li>
+          <li><kbd>Ratón</kbd> - Mover Cámara (Click)</li>
+          <li><kbd>ESPACIO</kbd> / Clic Izq. - Látigo Espinoso</li>
+          <li><kbd>ESC</kbd> - Liberar Ratón</li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Pantallas Overlay (Inicio, Game Over, Nivel Completado, Victoria) -->
+  <div id="overlay-screen" class="active">
+    <div class="modal-card">
+      <h1 class="glitch-title">AETHER'S STAIN</h1>
+      <p class="subtitle">EL CICLO MANCHADO</p>
+      
+      <div class="story-box">
+        <p>Encarnas a <strong>EFE ("El Manchado")</strong> en las entrañas de un humedal industrial en ruinas. Las <em>Ninfas de Libélula</em> acechan entre la penumbra.</p>
+        <p>Tu misión: sobrevivir a cada sector, usar tu <strong>Látigo Mecano-Espinoso</strong>, encontrar el <strong>Biochip Plateado</strong> resplandeciente para desbloquear la salida y escapar del ciclo biológico.</p>
+      </div>
+
+      <div class="sector-preview">
+        <span>SECTORES:</span>
+        <ol>
+          <li>Las Cisternas de la Ninfa</li>
+          <li>El Pabellón de la Transición</li>
+          <li>El Mar Rojo de Óxido</li>
+          <li>La Cumbre Efímera</li>
+        </ol>
+      </div>
+
+      <button id="start-btn" class="glow-button">INICIAR MISIÓN</button>
+    </div>
+  </div>
+
+  <!-- Carga de Scripts del Juego -->
+  <script src="src/sound.js"></script>
+  <script src="src/textures.js"></script>
+
+  <script src="src/map.js"></script>
+  <script src="src/hud.js"></script>
+  <script src="src/raycaster.js"></script>
+  <script src="src/game.js"></script>
+</body>
+</html>
